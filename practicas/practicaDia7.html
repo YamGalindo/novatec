@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<head>
+    <title> Title </title>
+    <style>
+        .form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form label {
+            font-size: 27px;
+        }
+
+        .form input {
+            width: 70%;
+            height: 30px;
+            margin: 0.5rem;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form button {
+            padding: 0.5em 1em;
+            border: none;
+            background: rgb(142, 147, 165);
+            cursor: pointer;
+            font-size: 18px;
+            width: 125px;
+            text-align: center;
+            align-items: center;
+        }
+
+        table {
+            width: 700px;
+            padding: 10px 20px;
+            border-collapse: inherit;
+            border-spacing: 0;
+        }
+
+        th,
+        td {
+            padding: 10px 20px;
+            border: 1px solid #000;
+            font-weight: bold;
+        }
+
+        div{
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+
+<body style="background-color:rgb(44,48,61);">
+    <form class="form" action="" method="post">
+        <label for="name">Nombre:</label>
+        <input id="name" type="text" name="name">
+        <label for="genero">Genero:</label>
+        <input id="genero" type="text" name="genero">
+        <label for="-numero">Numero:</label>
+        <input id="numero" type="text" name="numero">
+        <div>
+            <button id="data" onclick="procesar()" type="button">Enviar</button>
+            <button id="dataDescarga" onclick="descargar()" type="button">Descargar</button>
+            <input id="dataSubir" type="file"></input>
+        </div>
+    </form>
+    <script type="text/javascript">
+
+        let fileInput = document.createElement('input');
+        fileInput.id = 'fileUpload';
+        fileInput.type = 'file';
+
+        function parserCSV(texto) {
+            let lineas = texto.replaceAll("/\r/g").split("\n");
+            return lineas.map((linea) => {
+                let valores = linea.split(";");
+                if (valores.length <= 0) {
+                    valores = linea.split(",");
+                }
+                return valores;
+            });
+        }
+
+        function conversionArreglo(lineas) {
+            let salida = [];
+            let row = 0;
+            let col = 0;
+            lineas.forEach((fila) => {
+                fila.forEach((columna) => {
+                    if (salida[row] === undefined) {
+                        salida[row] = [];
+                    }
+                    salida[row][col] = columna;
+                    col++;
+                });
+                row++;
+                col = 0;
+            });
+            return salida;
+        }
+        function readFile(evt) {
+            let file = evt.target.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = (e) => {
+                let lineas = parserCSV(e.target.result);
+                let arreglo = conversionArreglo(lineas);
+                console.log(arreglo);
+                return crearFila(arreglo);
+            }
+        }
+
+        document.getElementById('dataSubir').addEventListener('change', readFile, false);
+
+        function crearPersona(nombre, genero, numero) {
+            let persona = [(nombre), (genero), (numero)]
+            let tmp = [];
+            tmp.push(persona);
+            return tmp;
+        }
+
+        function prepararData() {
+            let table = document.getElementById('tablaDatos');
+            let data = '';
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    data += col.innerHTML + ";";
+                }
+                data += '\n';
+            }
+            return data;
+        }
+
+
+        function descargarData(data) {
+            let today = new Date();
+            let fileName = 'Archivo' + today.getDate() + "_" + today.getMonth() + "_" + today.getFullYear() + ".xlsx";
+
+            if (window.Blob && (window.URL || window.webkitURL)) {
+                let save;
+                let clicEvent;
+                let blob = new Blob(["\ufeff", data], { type: 'text/xlsx' });
+                let reader = new FileReader();
+
+                reader.onload = function (event) {
+                    save = document.createElement('a');
+                    save.href = event.target.result;
+                    save.targer = '_blank';
+                    save.download = fileName;
+                    try {
+                        clicEvent = new MouseEvent('click', {
+                            'view': window,
+                            'bubbles': true,
+                            'cancelable': true
+                        });
+                    } catch (e) {
+                        clicEvent = document.createEvent("MouseEvent");
+                        clicEvent = initEvent('clic', true, true);
+                    }
+
+                    save.dispatchEvent(clicEvent);
+                    (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                }
+                reader.readAsDataURL(blob);
+            } else {
+                alert("Su navegador no permite esta accion.")
+            }
+        }
+
+        function descargar(){
+            descargarData(prepararData());
+        }
+
+
+        let center = document.createElement('center');
+        let tabla = document.createElement('table');
+        let cabezera = document.createElement('thead');
+        let cuerpo = document.createElement('tbody');
+        tabla.appendChild(cabezera);
+        tabla.appendChild(cuerpo);
+        document.body.appendChild(tabla);
+        document.body.appendChild(center)
+        center.appendChild(tabla);
+        tabla.id = 'tablaDatos';
+
+
+        let fila = document.createElement('tr');
+        let colCabecera1 = document.createElement('th');
+        colCabecera1.innerHTML = "Nombre";
+        let colCabecera2 = document.createElement('th');
+        colCabecera2.innerHTML = "Genero";
+        let colCabecera3 = document.createElement('th');
+        colCabecera3.innerHTML = "Numero";
+        fila.appendChild(colCabecera1);
+        fila.appendChild(colCabecera2);
+        fila.appendChild(colCabecera3);
+        cabezera.appendChild(fila);
+
+
+        function crearFila(data) {
+            this.data = data;
+            for (let i = 0; i <= data.length - 1; i++) {
+                let fila1 = document.createElement('tr');
+                let colCuerpo1 = document.createElement('th');
+                colCuerpo1.innerHTML = data[i][0];
+                let colCuerpo2 = document.createElement('th');
+                colCuerpo2.innerHTML = data[i][1];
+                let colCuerpo3 = document.createElement('th');
+                colCuerpo3.innerHTML = data[i][2];
+                fila1.appendChild(colCuerpo1);
+                fila1.appendChild(colCuerpo2);
+                fila1.appendChild(colCuerpo3);
+                cuerpo.appendChild(fila1);
+            }
+        }
+
+
+        function procesar() {
+            crearFila(crearPersona(
+                document.getElementById("name").value,
+                document.getElementById("genero").value,
+                document.getElementById("numero").value));
+        }
+
+
+    </script>
+</body>
+
+</html>

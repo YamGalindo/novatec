@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World!</title>
+</head>
+<body>
+<script>
+
+var fechaActual = new Date()
+	var fechaNacimiento = new Date(prompt('Ingrese su fecha de nacimiento', 'yyyy-mm-dd'))
+
+	var annos = fechaActual.getFullYear() - fechaNacimiento.getFullYear()
+	
+	
+	function meses(fecha){ 
+		return fechaActual.getMonth() < fecha.getMonth()?
+		((fechaActual.getMonth() - fecha.getMonth()) + 13): 
+		(fechaActual.getMonth() - fecha.getMonth())
+	}
+
+	function getDiasMes(anno, mes) {
+  		return new Date(anno, mes, 0).getDate();
+	}
+
+
+	function dias(fecha) {
+		if(fechaActual.getDate() < fecha.getDate()) {
+			var tmp = getDiasMes(fechaActual.getMonth(),fechaActual.getFullYear())
+			var dia = ((fechaActual.getDate() - fecha.getDate()) - tmp);
+		}else {
+			var dia = (fechaActual.getDate() - fecha.getDate())
+		}
+		return dia;
+	}
+
+
+	var horas = fechaActual.getHours() < fechaNacimiento.getHours()?
+				(fechaActual.getHours() - fechaNacimiento.getHours()) + 24 : 
+				fechaActual.getHours() - fechaNacimiento.getHours()
+
+	var minutos = fechaActual.getMinutes() < fechaNacimiento.getMinutes()?
+					(fechaActual.getMinutes() - fechaNacimiento.getMinutes()) + 60 :
+					(fechaActual.getMinutes() - fechaNacimiento.getMinutes())
+
+
+
+	console.log('El user tiene : Annos ' + annos + ' meses ' + meses(fechaNacimiento) + ' dias '
+			 + dias(fechaNacimiento) + ' horas ' + horas + ' minutos '+ minutos)
+
+    function crearDivNumero(numero){
+	    for(i = 0; i<numero; i++){
+		let tmp = document.createElement('DIV')
+		document.body.append(tmp.id = i);
+	}
+}
+
+
+
+	
+</script>
+</body>
+</html>

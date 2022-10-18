@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World!</title>
+</head>
+<body>
+<script>
+	
+function crearDivGenerico(dato){
+		let tmp = document.createElement('DIV')
+		document.body.append(tmp.id = tmp);
+		document.getElementById(tmp).innerHTML = dato;
+}
+
+class Persona {
+	constructor(nombre, edad, genero, estaVivo){
+		this.nombre = nombre;
+		this.edad = edad;
+		this.genero = genero;
+		this.estaVivo = estaVivo;
+	}
+} 
+
+Persona.prototype.toString = function personaToString() {
+  var tmp = "Nombre " + this.nombre + " tiene " + this.edad + " es " + this.genero + " y esta " + this.estaVivo;
+  return tmp;
+}
+
+let arregloPersona = [];
+
+let nombre = prompt('ingrese nombre: ');
+let edad = prompt('ingrese edad: ');
+let genero = prompt('ingrese genero: ');
+let estaVivo = prompt('esta vivo?: ', 'vivo/muerto');
+
+let tmp = new Persona(nombre, edad, genero, estaVivo);
+arregloPersona.push(tmp);
+let texto = tmp;
+
+crearDivGenerico(texto);
+
+
+</script>
+</body>
+</html>

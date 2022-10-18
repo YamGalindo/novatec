@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<head>
+    <title>Martes</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        th,
+        td {
+            padding: 10px 20px;
+            border: 1px solid #000;
+        }
+    </style>
+    <span>llenarTabla(); para llenar la tabal de los registros tener archivo data.json en la misma carpeta para tener la informacion a cargar</span>
+<body>
+    <script type="text/javascript" src="data.json"></script>
+    <script type="text/javascript">
+        
+        let promesa = fetch('data.json').then((response) => response.json()).then((json) => data = (json));
+
+        let tabla = document.createElement('table');
+        let cabezera = document.createElement('thead');
+        let cuerpo = document.createElement('tbody');
+        tabla.appendChild(cabezera);
+        tabla.appendChild(cuerpo);
+        document.body.appendChild(tabla);
+        tabla.id = 'tablaDatos';
+
+        let fila = document.createElement('tr');
+        let colCabecera1 = document.createElement('th');
+        colCabecera1.innerHTML = "nombre";
+        let colCabecera2 = document.createElement('th');
+        colCabecera2.innerHTML = "genero";
+        let colCabecera3 = document.createElement('th');
+        colCabecera3.innerHTML = "numero";
+        fila.appendChild(colCabecera1);
+        fila.appendChild(colCabecera2);
+        fila.appendChild(colCabecera3);
+        cabezera.appendChild(fila);
+
+        function llenarTabla() {
+            for (let i = 1; i < data.length; i++) {
+                let fila1 = document.createElement('tr');
+                let colCuerpo1 = document.createElement('th');
+                colCuerpo1.innerHTML = data[i].first_name;
+                let colCuerpo2 = document.createElement('th');
+                colCuerpo2.innerHTML = data[i].gender;
+                let colCuerpo3 = document.createElement('th');
+                colCuerpo3.innerHTML = data[i].number;
+                fila1.appendChild(colCuerpo1);
+                fila1.appendChild(colCuerpo2);
+                fila1.appendChild(colCuerpo3);
+                cuerpo.appendChild(fila1);
+            }
+        }
+
+        function prepararData() {
+            let table = document.getElementById('tablaDatos');
+            let data = '';
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    data += col.innerHTML + ";";
+                }
+                data += '\n';
+            }
+            return data;
+        }
+
+
+        function descargarData(data) {
+            let today = new Date();
+            let fileName = 'Archivo' + today.getDate() + "_" + today.getMonth() + "_" + today.getFullYear() + ".xlsx";
+
+            if (window.Blob && (window.URL || window.webkitURL)) {
+                let save;
+                let clicEvent;
+                let blob = new Blob(["\ufeff", data], { type: 'text/xlsx' });
+                let reader = new FileReader();
+
+                reader.onload = function (event) {
+                    save = document.createElement('a');
+                    save.href = event.target.result;
+                    save.targer = '_blank';
+                    save.download = fileName;
+                    try {
+                        clicEvent = new MouseEvent('click', {
+                            'view': window,
+                            'bubbles': true,
+                            'cancelable': true
+                        });
+                    } catch (e) {
+                        clicEvent = document.createEvent("MouseEvent");
+                        clicEvent = initEvent('clic', true, true);
+                    }
+
+                    save.dispatchEvent(clicEvent);
+                    (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                }
+                reader.readAsDataURL(blob);
+            } else {
+                alert("Su navegador no permite esta accion.")
+            }
+        }
+
+        llenarTabla();
+        function descargar(){
+            descargarData(prepararData());
+        }
+
+    </script>
+</body>
+
+</html>

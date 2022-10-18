@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<head>
+    <title>Miercoles
+    </title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        th,
+        td {
+            padding: 10px 20px;
+            border: 1px solid #000;
+        }
+    </style>
+
+<body>
+    <script type="text/javascript">
+
+
+        let fileInput = document.createElement('input');
+        fileInput.id = 'fileUpload';
+        fileInput.type = 'file';
+        document.body.appendChild(fileInput);
+
+        function parserCSV(texto) {
+            let lineas = texto.replaceAll("/\r/g").split("\n");
+            return lineas.map((linea) => {
+                let valores = linea.split(";");
+                if (valores.length <= 0) {
+                    valores = linea.split(",");
+                }
+                return valores;
+            });
+        }
+        function conversionArreglo(lineas) {
+            let salida = [];
+            let row = 0;
+            let col = 0;
+            lineas.forEach((fila) => {
+                fila.forEach((columna) => {
+                    if (salida[row] === undefined) {
+                        salida[row] = [];
+                    }
+                    salida[row][col] = columna;
+                    col++;
+                });
+                row++;
+                col = 0;
+            });
+            return salida;
+        }
+        function readFile(evt) {
+            let file = evt.target.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = (e) => {
+                let lineas = parserCSV(e.target.result);
+                let arreglo = conversionArreglo(lineas);
+                console.log(arreglo);
+                return llenarTabla(arreglo);
+            }
+        }
+
+        document.getElementById('fileUpload').addEventListener('change', readFile, false);
+
+
+        function llenarTabla(data) {
+            this.data = data;
+            let tabla = document.createElement('table');
+            let cabezera = document.createElement('thead');
+            let cuerpo = document.createElement('tbody');
+            tabla.appendChild(cabezera);
+            tabla.appendChild(cuerpo);
+            document.body.appendChild(tabla);
+            tabla.id = 'tablaDatos';
+            for (let i = 0; i <= data.length - 1; i++) {
+                let fila1 = document.createElement('tr');
+                let colCuerpo1 = document.createElement('th');
+                colCuerpo1.innerHTML = data[i][0];
+                let colCuerpo2 = document.createElement('th');
+                colCuerpo2.innerHTML = data[i][1];
+                let colCuerpo3 = document.createElement('th');
+                colCuerpo3.innerHTML = data[i][2];
+                fila1.appendChild(colCuerpo1);
+                fila1.appendChild(colCuerpo2);
+                fila1.appendChild(colCuerpo3);
+                cuerpo.appendChild(fila1);
+            }
+        }
+
+        function excepcionControlada(mensaje) {
+            this.mensaje = mensaje;
+            this.name = 'UserException';
+        }
+
+
+    </script>
+</body>
+
+</html>

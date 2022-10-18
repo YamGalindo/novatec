@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>reinas</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .td {
+            height: 60px;
+            width: 60px;
+            border: 1.5px solid grey;
+            border-style: inset;
+        }
+
+        .tdNegra {
+            background-color: black;
+        }
+
+        .tdNegraMarcada {
+            background-color: black;
+            color: white;
+            font-size: 50px;
+            align-items: center;
+        }
+
+        .tdBlanca {
+            background-color: white;
+        }
+
+        .tdBlancaMarcada {
+            background-color: white;
+            color: black;
+            font-size: 50px;
+            align-items: center;
+        }
+    </style>
+    <span> solveNQ(); en consola para pintar la solucion</span>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+            let board = Array.from({ length: 8 }, () => Array.from({ length: 8 }, () => 0));
+            const N = 7;
+            var center = document.createElement('center');
+            var tabla = document.createElement('tabla'); var tabla = document.createElement('tabla');
+
+            function pintarSolucion(board) {
+
+                for (let i = 0; i < 8; i++) {
+                    var tr = document.createElement('tr');
+                    for (var j = 0; j < 8; j++) {
+                        var td = document.createElement('td');
+                        if ((i + j) % 2 == 0 && board[i][j]) {
+                            td.setAttribute('class', 'td tdBlancaMarcada');
+                            td.append('R')
+                            tr.appendChild(td);
+                        }
+                        else if ((i + j) % 2 == 0) {
+                            td.setAttribute('class', 'td tdBlanca');
+                            tr.appendChild(td);
+
+                        } else if ((i + j) % 2 != 0 && board[i][j]) {
+                            td.setAttribute('class', 'td tdNegraMarcada');
+                            td.append('R')
+                            tr.appendChild(td);
+                        } else {
+                            td.setAttribute('class', 'td tdNegra');
+                            tr.appendChild(td);
+                        }
+                    }
+                    tabla.appendChild(tr);
+                }
+            }
+
+            center.appendChild(tabla);
+            tabla.setAttribute('separacion', '0');
+            tabla.setAttribute('width', '700px');
+            tabla.setAttribute('height', '700px');
+            document.body.appendChild(center);
+
+            function isSafe(board, row, col) {
+
+                for (let i = 0; i < col; i++) {
+                    if (board[row][i] == 1)
+                        return false
+                }
+
+                for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+                    if (board[i][j])
+                        return false
+
+                for (i = row, j = col; j >= 0 && i < N; i++, j--)
+                    if (board[i][j])
+                        return false
+
+                return true
+            }
+
+            function solveNQUtil(board, col) {
+
+                if (col >= N)
+                    return true
+
+                for (let i = 0; i < N; i++) {
+
+                    if (isSafe(board, i, col) == true) {
+                        board[i][col] = 1
+
+                        if (solveNQUtil(board, col + 1) == true)
+                            return true
+                        board[i][col] = 0
+                    }
+                }
+                return false
+            }
+
+            function solveNQ() {
+                let board = Array.from({ length: 8 }, () => Array.from({ length: 8 }, () => 0));
+
+                if (solveNQUtil(board, 0) == false) {
+                    document.write("Solution does not exist")
+                    return false
+                }
+
+                pintarSolucion(board)
+                return true
+            }
+
+
+        </script>
+</body>
+</html>
