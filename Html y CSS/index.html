@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+  <title>AppDeGatos</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <h2>AppDeGatos</h2>
+  <main>
+    <h3>Imagenes de gatos:</h3>
+    <!-- -->
+    <p>Haz click aqui para ver mas <a href="https://www.freecodecamp.org/" target="_blank"
+        rel="noopener noreferrer">imagenes de gatos.</a> </p>
+
+    <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer"><img
+        src="https:bit.ly/fcc-relaxing-cat" alt="Un gato."></a>
+
+    <hr>
+
+    <h3> Listas de Gatos </h3>
+    <div>
+      <p> Cosas que los gatos aman:</p>
+      <ul>
+        <li>Menta gatuna</li>
+        <li>Apuntadores laser</li>
+        <li>Lasana</li>
+      </ul>
+
+      <p> Cosas que los gatos odian:</p>
+      <ol>
+        <li>Tratamientos antipulgas</li>
+        <li>Truenos</li>
+        <li>Otros gatos</li>
+      </ol>
+    </div>
+
+    <form action="/direccion-respuesta">
+      <label for="interior"><input id="interior" type="radio" value="interior" name="interior-exterior"
+          checked>Interior</label>
+      <br>
+      <label for="exterior"><input id="exterior" type="radio" value="exterior" name="interior-exterior">Exterior</label>
+      <br>
+      <label for="carinoso"><input id="carinoso" type="checkbox" value="carinoso" name="personalizad"
+          checked>Carinoso</label>
+      <label for="perezoso"><input id="perezoso" type="checkbox" value="perezoso " name="personalizad">Perezoso</label>
+      <label for="energico"><input id="energico" type="checkbox" value="energico" name="personalizad">Energico</label>
+      <br>
+
+      <input type="text" placeholder="URL de foto de gato" required>
+      <button type="submit">Enviar</button>
+    </form>
+
+  </main>
+
+  <footer>
+    <p><small>Sin Derechos de Autor - <a href="https://www.freecodecamp.org/espanol/">freeCodeCamp.org</a></small></p>
+  </footer>
+
+</body>
+
+</html>
