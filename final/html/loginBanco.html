@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>AppBanco</title>
+    <link href="/final/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script type="text/javascript" src="../js/loginBanco.js"></script>
+    <header>
+        <button id="atras" onclick="location.href='loginCliente.html'" type="button"> Clientes</button>
+        <h1>Banco Novatec administracion</h1>
+    </header>
+
+    <form class="form" action="" method="post">
+        <label for="user">Usuario</label>
+        <input id="user" type="text" name="user">
+        <label for="pass">Contraseña</label>
+        <input id="pass" type="password" name="pass">
+        <div>
+            <button id="login" onclick="inicioSession()" type="button">Ingresar</button>
+        </div>
+    </form>
+</body>
+</html>

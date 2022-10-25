@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>AppBanco</title>
+    <link href="/final/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script type="text/javascript" src="../js/transferencia.js"></script>
+    <header>
+        <button id="atras" onclick="location.href='homeCliente.html'" type="button"> Atras</button>
+        <h1>Banco Novatec</h1>
+        <h2>Transferencia</h2>
+    </header>
+
+    <form class="form" action="" method="post">
+        <label for="account">Cuenta</label>
+        <input id="account" type="text" name="acount">
+        <label for="cantidad">Cantidad</label>
+        <input id="cantidad" type="number" name="cantidad">
+        <div>
+            <button id="login" onclick="transferir()" type="button">Transferir</button>
+        </div>
+</body>
+</html>
