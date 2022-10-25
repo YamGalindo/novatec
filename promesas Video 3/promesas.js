@@ -40,5 +40,5 @@ function temporizador(time) {
 }
 
 temporizador(5000)
-.then(() => console.log("paso el tiempo"))
-.catch(() => console.log("tiempo de ejecicion interrumpido"));
+    .then(() => console.log("paso el tiempo"))
+    .catch(() => console.log("tiempo de ejecicion interrumpido"));
