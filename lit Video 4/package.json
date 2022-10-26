@@ -1,0 +1,19 @@
+{
+  "name": "lit-video-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "web-dev-server --node-resolve --open --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@web/dev-server": "^0.1.35"
+  },
+  "dependencies": {
+    "lit": "^2.4.0",
+    "wired-elements": "^3.0.0-rc.6"
+  }
+}

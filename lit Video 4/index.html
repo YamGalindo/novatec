@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>AppLit</title>
+</head>
+
+<body>
+
+    <eit-counter id="counter" counter="0">
+        <h2>Contador</h2>
+    </eit-counter>
+
+    <button id="reset"> Reset </button>
+
+    <script src="./componentes/eit-counter.js" type="module"></script>
+    <script>
+        document.getElementById('reset').addEventListener('click', function(){
+            document.getElementById('counter').counter = 0;
+        })
+    </script>
+</body>
+
+</html>
