@@ -9,7 +9,7 @@ export default css`
         text-align: center;
         display: flex;
         flex: 100%;
-        padding: 0 270px;
+        padding: 0 300px;
 
     }
 
