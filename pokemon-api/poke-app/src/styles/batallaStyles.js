@@ -67,7 +67,7 @@ export const styles = css`
         }
     }
 
-    button {
+    .boton {
         font-size: 1.4rem;
     }
 
