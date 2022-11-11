@@ -62,18 +62,18 @@ export class PokeBatalla extends LitElement {
             return html`
                 <div class="pokeCard">
                     <div class="img">
-                        <img src="https://www.latercera.com/resizer/vx1_S0T1j_as_Uto1SJAUURxcqs=/768x0/smart/filters:quality(70):format(webp):no_upscale()/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/LUOOHUM2OVEEXG7ZTRSNI6XWLY.png">
+                        <img src="http://ichno.org/dokuwiki/lib/exe/fetch.php?cache=&media=characters:placeholder.png">
                     </div>                    
                     <div class="info">
-                        <p> Missing N0 </p>
+                        <p> Pokemon 1 </p>
                     </div>
                 </div>
                 <div class="pokeCard">
                     <div class="img">
-                        <img src="https://www.latercera.com/resizer/vx1_S0T1j_as_Uto1SJAUURxcqs=/768x0/smart/filters:quality(70):format(webp):no_upscale()/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/LUOOHUM2OVEEXG7ZTRSNI6XWLY.png">
+                        <img src="http://ichno.org/dokuwiki/lib/exe/fetch.php?cache=&media=characters:placeholder.png">
                     </div>
                     <div class="info">
-                        <p> Missing N0 </p>
+                        <p> Pokemon 2 </p>
                     </div>
                 </div>
             `
