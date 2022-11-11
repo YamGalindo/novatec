@@ -44,12 +44,8 @@ export class PokeApp extends LitElement {
     this.addEventListener('limpiar', (e) => {
       this.pokemons = [];
       this.actualizar = true;
-    })
-
-    this.addEventListener('urlUpdate', (e) => {
-      this.actualizar = true;
-    })
-  }
+      })
+    }
   
   render() {
     return html`

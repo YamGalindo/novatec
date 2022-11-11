@@ -31,7 +31,7 @@ export class FetchPaginator extends LitElement {
     set actualizar(xd){
         if(!xd){
             this.getData(this.home);
-            this._actualizar = xd;
+            this._actualizar = false;
             return;
         }
             this.getData(this._url);
