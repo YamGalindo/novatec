@@ -13,8 +13,7 @@ describe('AppTest', () => {
   it('Validando tipo dato a', async () => {
     const el = await fixture(html`<app-test></app-test>`);
     assert.typeOf(el.pokemonA, 'Object', 'tipo de dato esperado Object');
-  });
-
+  });cd
   it('Validar Batalla', async () => {
 
     let pokemon1 = { "name": "Pokemon A", "img": "", "hp": 100, "power": 100, "battleWins": 0 };
@@ -25,7 +24,6 @@ describe('AppTest', () => {
     const el = await fixture(html`<app-test .pokemonA=${pokemon1} .pokemonB=${pokemon2}></app-test>`);
     let respuesta = el.battle();
     console.log(localStorage)
-
     assert.respuesta = '"[{"name":"pokemon a","battleWins":1}]"'
   })
 });
