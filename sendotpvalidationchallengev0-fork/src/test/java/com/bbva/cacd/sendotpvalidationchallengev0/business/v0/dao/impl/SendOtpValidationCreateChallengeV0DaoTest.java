@@ -32,6 +32,7 @@ public class SendOtpValidationCreateChallengeV0DaoTest {
     @Mock
     private ServicioTransacciones transaccionService;
 
+
     @Before
     public void init(){
         dummyMock = new DummyMock();
@@ -43,7 +44,7 @@ public class SendOtpValidationCreateChallengeV0DaoTest {
         Mockito.when(mapper.getRequestTx(Mockito.any(BDtoInCreateChallengePost.class)))
                 .thenReturn(dummyMock.getRequestDao());
         Mockito.when(transaccionService.invocar(Mockito.any(), Mockito.any(), Mockito.any(RequestTransactionCceetl01_1.class)))
-                .thenReturn(dummyMock.getRequestDao());
+                .thenReturn(dummyMock.getResponseDao());
         Mockito.when(mapper.getResponse(Mockito.any(ResponseTransactionCceetl01_1.class)))
                 .thenReturn(dummyMock.getResponseDaoMapped());
         BDtoOutCreateChallengePost response = dao.invokeRestlessApxTransaction(dummyMock.getBDtoInCreateChallengePost());

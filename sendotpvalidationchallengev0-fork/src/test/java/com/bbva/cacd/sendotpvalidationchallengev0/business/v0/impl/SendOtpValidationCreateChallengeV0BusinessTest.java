@@ -20,7 +20,7 @@ public class SendOtpValidationCreateChallengeV0BusinessTest {
   @InjectMocks private SendOtpValidationCreateChallengeV0Business bSrv;
 
   private DummyMock dummyMock;
-
+  @Mock
   private SendOtpValidationCreateChallengeV0Dao dao;
 
   @Before
@@ -31,8 +31,9 @@ public class SendOtpValidationCreateChallengeV0BusinessTest {
 
   @Test
   public void testSendOtpValidationCreateChallengeV0() {
-    Mockito.when(bSrv.sendOtpValidationCreateChallengeV0(Mockito.any(BDtoInCreateChallengePost.class)))
-            .thenReturn(dao.invokeRestlessApxTransaction(dummyMock.getBDtoInCreateChallengePost()));
+
+    Mockito.when(dao.invokeRestlessApxTransaction(Mockito.any(BDtoInCreateChallengePost.class)))
+            .thenReturn(dummyMock.getBDtoOutCreateChallengePost());
     BDtoOutCreateChallengePost response = bSrv.sendOtpValidationCreateChallengeV0(dummyMock.getBDtoInCreateChallengePost());
     Assert.assertNotNull(response);
   }

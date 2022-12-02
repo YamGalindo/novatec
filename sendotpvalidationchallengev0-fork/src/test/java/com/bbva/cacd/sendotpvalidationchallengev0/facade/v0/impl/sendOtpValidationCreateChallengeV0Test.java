@@ -22,12 +22,6 @@ public class sendOtpValidationCreateChallengeV0Test {
     @Mock
     private  ISendOtpValidationCreateChallengeV0Business sendOtpValidationCreateChallengeV0Business;
 
-    @Mock
-    private Mappers mappers;
-
-    @Mock
-    private CreateChallengePostMapper mapper;
-
     @Before
     public void init(){
         dummyMock = new DummyMock();
@@ -36,10 +30,10 @@ public class sendOtpValidationCreateChallengeV0Test {
 
     @Test
     public void sendOtpValidationCreateChallengeV0(){
-        // Mockito.when(mappers.getMapper(Mockito.any(CreateChallengePostMapper.class)))
-        //        .thenReturn(mapper);
-
-
+        Mockito.when(sendOtpValidationCreateChallengeV0Business
+                .sendOtpValidationCreateChallengeV0(Mockito.any(BDtoInCreateChallengePost.class)))
+                .thenReturn(dummyMock.getBDtoOutCreateChallengePost());
+        srv.sendOtpValidationCreateChallengeV0(dummyMock.getDtoInCreateChallengePost());
     }
 
 }
